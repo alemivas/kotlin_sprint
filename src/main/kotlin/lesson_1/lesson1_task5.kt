@@ -5,14 +5,21 @@ fun main() {
     val fullSeconds: Short = 6480
 
     // остаток секунд без целых часов
-    val moduloSeconds: Short = (fullSeconds % 3600).toShort()
+    val secondsWoHours: Short = (fullSeconds % 3600).toShort()
 
-    val hours: Byte = (fullSeconds/3600).toByte()
+    var hours: String = (fullSeconds/3600).toString()
 
-    val seconds: Byte = (moduloSeconds % 60).toByte()
+    var seconds: String = (secondsWoHours % 60).toString()
 
-    val minutes: Byte = (moduloSeconds/60).toByte()
+    var minutes: String = (secondsWoHours/60).toString()
 
-    println("$hours : $minutes : $seconds")
+    if (hours.length == 1)
+        hours = "0$hours"
+    if (minutes.length == 1)
+        minutes = "0$minutes"
+    if (seconds.length == 1)
+        seconds = "0$seconds"
+
+    println("$hours:$minutes:$seconds")
 
 }
