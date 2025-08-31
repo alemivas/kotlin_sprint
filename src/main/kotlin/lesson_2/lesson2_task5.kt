@@ -2,7 +2,7 @@ package org.example.lesson_2
 
 import kotlin.math.pow
 
-const val DIVISOR_FOR_PERCENT = 100
+const val DIV_FOR_PERCENT = 100
 
 fun main() {
 
@@ -10,7 +10,7 @@ fun main() {
     val interestRateInPercent = 16.7
     val depositPeriod = 20
 
-    val interestRateInFloat = interestRateInPercent / DIVISOR_FOR_PERCENT
+    val interestRateInFloat = interestRateInPercent / DIV_FOR_PERCENT
     val multiplier = (1 + interestRateInFloat).pow(depositPeriod)
     val accumulatedCapital = depositAmount * multiplier
 
