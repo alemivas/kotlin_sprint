@@ -4,7 +4,7 @@ fun main() {
 
     val move = "D2-D4;0"
 
-    val (from, to, moveNumber) = move.split(Regex("""[-;]"""))
+    val (from, to, moveNumber) = move.split(";", "-")
 
     println("откуда: $from")
     println("куда: $to")
