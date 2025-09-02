@@ -2,8 +2,9 @@ package org.example.lesson_5
 
 fun main() {
 
-    val number1 = 3
-    val number2 = 5
+    val randomRange = 1..9
+    val number1 = randomRange.random()
+    val number2 = randomRange.random()
 
     println(
         "Если ты человек, то напиши результат\n$number1 + $number2 = ?"
@@ -11,7 +12,7 @@ fun main() {
 
     val enteredResult = readln().toInt()
 
-    if (enteredResult == (number1 + number2))
+    if (enteredResult == number1 + number2)
         println("Добро пожаловать, человек!")
     else
         println("Доступ запрещен")
