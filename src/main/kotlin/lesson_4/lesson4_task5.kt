@@ -2,8 +2,8 @@ package org.example.lesson_4
 
 fun main() {
 
-    println("Корабль имеет повреждения? (true/false)")
-    val isCaseDamage = readln().toBoolean()
+    println("Корабль не имеет повреждения? (true/false)")
+    val isCaseNotDamage = readln().toBoolean()
 
     println("Текущий состав экипажа?")
     val crewComposition = readln().toInt()
@@ -15,15 +15,21 @@ fun main() {
     val isFavorableWeatherConditions = readln().toBoolean()
 
     val canShipGoSailing = (
-            !isCaseDamage &&
-            crewComposition in 55..70 &&
-            boxesOfProvisionsNumbers > 50
+            isCaseNotDamage == CASE_NOT_DAMAGE &&
+            crewComposition in MINIMUM_CREW_COMPOSITION..RECOMMENDED_CREW_COMPOSITION &&
+            boxesOfProvisionsNumbers > MINIMUM_BOXES_OF_PROVISIONS_NUMBERS
             ) || (
-            crewComposition == 70 &&
-            isFavorableWeatherConditions &&
-            boxesOfProvisionsNumbers >= 50
+            crewComposition == RECOMMENDED_CREW_COMPOSITION &&
+            isFavorableWeatherConditions == FAVORABLE_WEATHER_CONDITIONS &&
+            boxesOfProvisionsNumbers >= MINIMUM_BOXES_OF_PROVISIONS_NUMBERS
             )
 
     println("может ли корабль отправиться в плавание? $canShipGoSailing")
 
 }
+
+const val CASE_NOT_DAMAGE = true
+const val MINIMUM_CREW_COMPOSITION = 55
+const val RECOMMENDED_CREW_COMPOSITION = 70
+const val MINIMUM_BOXES_OF_PROVISIONS_NUMBERS = 50
+const val FAVORABLE_WEATHER_CONDITIONS = true
