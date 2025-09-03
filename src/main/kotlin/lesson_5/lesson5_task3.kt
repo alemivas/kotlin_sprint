@@ -2,10 +2,11 @@ package org.example.lesson_5
 
 fun main() {
 
-    val hiddenNumber1 = 25
-    val hiddenNumber2 = 17
+    val rangeForRandom = MINIMUM_HIDDEN_NUMBER..MAXIMUM_HIDDEN_NUMBER
+    val hiddenNumber1 = rangeForRandom.random()
+    val hiddenNumber2 = rangeForRandom.random()
 
-    println("Угадайте 2 числа от 0 до 42")
+    println("Угадайте 2 числа от $MINIMUM_HIDDEN_NUMBER до $MAXIMUM_HIDDEN_NUMBER")
 
     println("Введите первое число")
     val numberToGuess1 = readln().toInt()
@@ -29,3 +30,6 @@ fun main() {
     println("Загаданные числа были: $hiddenNumber1 и $hiddenNumber2")
 
 }
+
+const val MINIMUM_HIDDEN_NUMBER = 0
+const val MAXIMUM_HIDDEN_NUMBER = 42
