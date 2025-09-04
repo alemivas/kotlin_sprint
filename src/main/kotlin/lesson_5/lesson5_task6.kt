@@ -8,13 +8,12 @@ fun main() {
     val height = readln().toFloat()
 
     val heightInMeters = height / CM_IN_METER
-
     val bmi = mass / (heightInMeters * heightInMeters)
 
     val weightCategory = when {
-        bmi < WEIGHT_CATEGORY_SEPARATOR_1 -> "Недостаточная масса тела"
-        bmi < WEIGHT_CATEGORY_SEPARATOR_2 -> "Нормальная масса тела"
-        bmi < WEIGHT_CATEGORY_SEPARATOR_3 -> "Избыточная масса тела"
+        bmi < BMI_UNDERWEIGHT -> "Недостаточная масса тела"
+        bmi < BMI_NORMAL_WEIGHT -> "Нормальная масса тела"
+        bmi < BMI_OVERWEIGHT -> "Избыточная масса тела"
         else -> "Ожирение"
     }
 
@@ -25,6 +24,6 @@ fun main() {
 }
 
 const val CM_IN_METER = 100
-const val WEIGHT_CATEGORY_SEPARATOR_1 = 18.5f
-const val WEIGHT_CATEGORY_SEPARATOR_2 = 25f
-const val WEIGHT_CATEGORY_SEPARATOR_3 = 30f
+const val BMI_UNDERWEIGHT = 18.5f
+const val BMI_NORMAL_WEIGHT = 25f
+const val BMI_OVERWEIGHT = 30f
