@@ -2,8 +2,7 @@ package org.example.lesson_6
 
 fun main() {
 
-    val hiddenRange = MIN_NUMBER..MAX_NUMBER
-    val hiddenNumber = hiddenRange.random()
+    val hiddenNumber = (MIN_NUMBER..MAX_NUMBER).random()
 
     var attemptsAmount = 5
 
@@ -18,7 +17,7 @@ fun main() {
         when {
             guessNumber == hiddenNumber -> {
                 println("Это была великолепная игра!")
-                attemptsAmount = 0
+                return
             }
 
             attemptsAmount > 0 ->
