@@ -2,23 +2,23 @@ package org.example.lesson_7
 
 fun main() {
 
+    val authorizationCodeRange = MIN_CODE..MAX_CODE
+    var authorizationCode: String
+    var inputCode: String
+    var isCodeCorrect: Boolean
+
     do {
-
-        val authorizationCode = (MIN_CODE..MAX_CODE).random().toString()
-
+        authorizationCode = authorizationCodeRange.random().toString()
         println("\nВаш код авторизации: $authorizationCode")
 
         println("Введите код авторизации")
-        val inputCode = readln()
+        inputCode = readln()
 
-        val isCodeCorrect = inputCode == authorizationCode
+        isCodeCorrect = inputCode == authorizationCode
         if (!isCodeCorrect)
             println("Код не верный")
-
-    }while (!isCodeCorrect)
-
+    } while (!isCodeCorrect)
     println("Добро пожаловать!")
-
 }
 
 const val MIN_CODE = 1000
