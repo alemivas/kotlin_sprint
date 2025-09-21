@@ -6,10 +6,11 @@ fun main() {
 
     println("До конца осталось:")
     for (i in seconds downTo 1) {
-        println("$i секунд")
+        print("\r")
+        print("$i секунд")
         Thread.sleep(ONE_SECOND_IN_MILLIS)
     }
-    println("Время вышло")
+    println("\rВремя вышло")
 }
 
 const val ONE_SECOND_IN_MILLIS = 1000L
