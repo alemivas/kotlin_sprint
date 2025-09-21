@@ -2,9 +2,9 @@ package org.example.lesson_7
 
 fun main() {
     println("=== Генератор паролей ===\n")
-    println("Сколько символов должно быть в пароле? (минимальная длина пароля 6 символов)")
+    println("Сколько символов должно быть в пароле? (минимальная длина пароля $MIN_SYMBOLS_AMOUNT символов)")
     var symbolsAmount = readln().toInt()
-    if (symbolsAmount < 6)
+    if (symbolsAmount < MIN_SYMBOLS_AMOUNT)
         symbolsAmount = 6
 
     val digitRange = MIN_DIGIT..MAX_DIGIT
@@ -12,13 +12,19 @@ fun main() {
     val uppercaseLetterRange = MIN_UPPERCASE_LETTER..MAX_UPPERCASE_LETTER
     val fullSymbolsList = digitRange + lowercaseLetterRange + uppercaseLetterRange
 
-    var password = ""
-    for (i in 1..symbolsAmount) {
-        password += fullSymbolsList.random()
+    val password = mutableListOf<Char>()
+    password.add(digitRange.random())
+    password.add(lowercaseLetterRange.random())
+    password.add(uppercaseLetterRange.random())
+    for (i in 1..symbolsAmount - RANGE_AMOUNT) {
+        password.add(fullSymbolsList.random())
     }
-    println("Сгенерированный пароль: $password")
+    password.shuffle()
+    println("Сгенерированный пароль: ${password.joinToString(separator = "")}")
 }
 
+const val MIN_SYMBOLS_AMOUNT = 6
+const val RANGE_AMOUNT = 3
 const val MIN_DIGIT = '0'
 const val MAX_DIGIT = '9'
 const val MIN_LOWERCASE_LETTER = 'a'
