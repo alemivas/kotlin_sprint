@@ -5,7 +5,7 @@ fun main() {
     println("Сколько символов должно быть в пароле? (минимальная длина пароля $MIN_SYMBOLS_AMOUNT символов)")
     var symbolsAmount = readln().toInt()
     if (symbolsAmount < MIN_SYMBOLS_AMOUNT)
-        symbolsAmount = 6
+        symbolsAmount = MIN_SYMBOLS_AMOUNT
 
     val digitRange = MIN_DIGIT..MAX_DIGIT
     val lowercaseLetterRange = MIN_LOWERCASE_LETTER..MAX_LOWERCASE_LETTER
@@ -16,6 +16,7 @@ fun main() {
     password.add(digitRange.random())
     password.add(lowercaseLetterRange.random())
     password.add(uppercaseLetterRange.random())
+
     for (i in 1..symbolsAmount - RANGE_AMOUNT) {
         password.add(fullSymbolsList.random())
     }
