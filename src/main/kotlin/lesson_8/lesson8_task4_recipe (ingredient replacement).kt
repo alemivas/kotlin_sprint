@@ -4,7 +4,7 @@ fun main() {
     println("=== Замена ингредиента в рецепте ===")
     val ingredientsArray = arrayOf("яйца", "масло", "соль", "зелень", "перец")
     println("\nИнгредиенты: ")
-    println(ingredientsArray.joinToString(", "))
+    println(ingredientsArray.joinToString())
 
     println("\nКакой ингредиент хотите заменить?")
     val removedIngredient = readln()
@@ -14,7 +14,7 @@ fun main() {
         val addedIngredient = readln()
         ingredientsArray[indexOfRemovedIngredient] = addedIngredient
         println("\nГотово! Вы сохранили следующий список: ")
-        println(ingredientsArray.joinToString(", "))
+        println(ingredientsArray.joinToString())
     } else
         println("Такого ингредиента в рецепте нет")
 }
