@@ -4,7 +4,7 @@ fun main() {
     println("=== Список ингредиентов ===\n")
     println("Введите количество ингредиентов")
     val ingredientAmount = readln().toInt()
-    val ingredientArray = Array(ingredientAmount, { "" })
+    val ingredientArray = Array(ingredientAmount) { "" }
     println("Введите ингредиенты по одному")
 
     for (i in ingredientArray.indices) {
