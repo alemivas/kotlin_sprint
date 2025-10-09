@@ -3,14 +3,13 @@ package org.example.lesson_9
 fun main() {
     println("=== Сортировка уникальных ингредиентов ===")
     println()
-    val ingredientsList = mutableListOf<String>()
+    val ingredientsSet = mutableSetOf<String>()
     println("Введите $INGREDIENTS_AMOUNT ингредиентов по одному")
     for (i in 1..INGREDIENTS_AMOUNT) {
-        ingredientsList.add(readln())
+        ingredientsSet.add(readln())
     }
 
-    val sortAndUniqueIngredientsList = ingredientsList.distinct().sorted()
-    val sortAndUniqueIngredientsString = sortAndUniqueIngredientsList.joinToString()
+    val sortAndUniqueIngredientsString = ingredientsSet.sorted().joinToString()
     val uppercaseFirstCharIngredientsString = sortAndUniqueIngredientsString.replaceFirstChar { it.uppercase() }
 
     println("Отсортированный список ингредиентов без повторов:")
