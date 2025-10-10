@@ -18,7 +18,7 @@ fun main() {
     }
 }
 
-fun rollDice(): Int =
+fun rollDice() =
     (MIN_DICE_NUMBER..MAX_DICE_NUMBER).random()
 
 const val MIN_DICE_NUMBER = 1
