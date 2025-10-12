@@ -11,14 +11,12 @@ fun main() {
 
 fun generatePassword(passwordLength: Int): String {
     val digitRange = 0..9
-    val symbolRange = "!\"#\$%&'()*+,-./ "
+    val symbolRange = ' '..'/'        // " !\"#\$%&'()*+,-./"
     val password = StringBuilder()
 
     for (i in 1..passwordLength) {
-        when (i % 2 == 1) {
-            true -> password.append(digitRange.random())
-            false -> password.append(symbolRange.random())
-        }
+        if (i % 2 == 1) password.append(digitRange.random())
+        else password.append(symbolRange.random())
     }
     return password.toString()
 }
