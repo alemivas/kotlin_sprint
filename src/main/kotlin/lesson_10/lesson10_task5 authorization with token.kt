@@ -26,12 +26,14 @@ fun authorize(userName: String, userPassword: String): String? {
         val lowercaseLetterRange = 'a'..'z'
         val uppercaseLetterRange = 'A'..'Z'
         val fullSymbolsList = digitRange + lowercaseLetterRange + uppercaseLetterRange
-        val token = StringBuilder()
+//        val token = StringBuilder()
 
-        for (i in 1..TOKEN_LENGTH) {
-            token.append(fullSymbolsList.random())
-        }
-        token.toString()
+//        for (i in 1..TOKEN_LENGTH) {
+//            token.append(fullSymbolsList.random())
+//        }
+//        token.toString()
+
+        (1..TOKEN_LENGTH).map { fullSymbolsList.random() }.joinToString("")
     } else
         null
 }
