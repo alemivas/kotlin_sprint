@@ -17,7 +17,6 @@ class Recipe(
     val name: String,
     val image: String,
     var inFavorites: Boolean = false,
-    val category: Category,
     val ingredients: List<Ingredient>,
     val cookingMethod: String,
 ) {
@@ -42,5 +41,4 @@ class Ingredient(
     val name: String,
     val amount: Int,
     val units: String,
-    val recipe: Recipe,
 ) {}
