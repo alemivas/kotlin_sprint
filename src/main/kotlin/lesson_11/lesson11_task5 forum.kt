@@ -2,10 +2,20 @@ package org.example.lesson_11
 
 fun main() {
     println("=== Форум ===")
+
+    val forum = Forum()
+
+    forum.createNewUser(name = "Вася")
+    forum.createNewUser(name = "Петя")
+
+    forum.createNewMessage(userId = 1)
+    forum.createNewMessage(userId = 1)
+
+    forum.printThread()
 }
 
 class Forum(
-    val userList: MutableList<ForumUser>,
+    val userList: MutableList<ForumUser> = mutableListOf(),
 ) {
     fun createNewUser(name: String): ForumUser {
         val user = ForumUser(
@@ -26,7 +36,11 @@ class Forum(
     }
 
     fun printThread() {
-
+        userList.forEach { user ->
+            user.messageList.forEach { message ->
+                println("${user.userName}: ${message.message}")
+            }
+        }
     }
 }
 
