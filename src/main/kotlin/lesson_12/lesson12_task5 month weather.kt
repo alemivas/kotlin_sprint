@@ -4,7 +4,6 @@ import kotlin.random.Random
 
 fun main() {
     println("=== Погода за месяц ===")
-
     val temperatureRange = MIN_TEMPERATURE..MAX_TEMPERATURE
     val weatherDayList = (1..DAY_IN_MONTH).map {
         WeatherDay(
@@ -14,10 +13,14 @@ fun main() {
         )
     }
 
+    val averageDayTemperature = weatherDayList.map { it.dayTemperature }.average().toInt()
+    val averageNightTemperature = weatherDayList.map { it.nightTemperature }.average().toInt()
+    val precipitationDayAmount = weatherDayList.count { it.hasPrecipitation }
+
     println()
-    println("Средняя дневная температура за месяц: ${weatherDayList.map { it.dayTemperature }.average().toInt()} °C")
-    println("Средняя ночная температура за месяц: ${weatherDayList.map { it.nightTemperature }.average().toInt()} °C")
-    println("Количество дней с осадками за месяц: ${weatherDayList.count { it.hasPrecipitation }}")
+    println("Средняя дневная температура за месяц: $averageDayTemperature °C")
+    println("Средняя ночная температура за месяц: $averageNightTemperature °C")
+    println("Количество дней с осадками за месяц: $precipitationDayAmount")
 }
 
 class WeatherDay(
