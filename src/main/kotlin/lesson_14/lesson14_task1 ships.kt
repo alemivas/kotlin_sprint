@@ -8,9 +8,9 @@ fun main() {
 }
 
 open class Liner(
-    val speed: Int = 100,
-    val carryingCapacity: Int = 5,
-    val passengerCapacity: Int = 1000,
+    open val speed: Int = 100,
+    open val carryingCapacity: Int = 5,
+    open val passengerCapacity: Int = 1000,
 )
 
 class CargoShip(
