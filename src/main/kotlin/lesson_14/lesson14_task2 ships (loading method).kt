@@ -17,6 +17,7 @@ fun main() {
     val icebreaker1 = Icebreaker2(name = "Ледокол1")
     icebreaker1.loadShip()
     icebreaker1.printInfo()
+    println("Может ломать лед: ${if (icebreaker1.canBreakIce) "Да" else "Нет"}")
 }
 
 open class Liner2(
@@ -29,7 +30,7 @@ open class Liner2(
         println("Погрузка $name: выдвинут горизонтальный трап со шкафута")
     }
 
-    open fun printInfo() {
+    fun printInfo() {
         println("Название корабля: $name")
         println("Скорость: $speed")
         println("Грузоподъемность: $carryingCapacity")
@@ -61,10 +62,5 @@ class Icebreaker2(
 ) {
     override fun loadShip() {
         println("Погрузка $name: открыты ворота со стороны кормы")
-    }
-
-    override fun printInfo() {
-        super.printInfo()
-        println("Может ломать лед: ${if (canBreakIce) "Да" else "Нет"}")
     }
 }
