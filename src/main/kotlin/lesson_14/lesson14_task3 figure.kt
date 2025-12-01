@@ -1,6 +1,7 @@
 package org.example.lesson_14
 
 import kotlin.math.PI
+import kotlin.math.pow
 import kotlin.math.roundToInt
 
 fun main() {
@@ -40,7 +41,7 @@ class Round(
     color: FigureColor,
     val radius: Int,
 ) : Figure(color) {
-    override fun calculateArea() = PI * radius * radius
+    override fun calculateArea() = PI * radius.toDouble().pow(2)
 
     override fun calculatePerimeter() = 2 * PI * radius
 }
@@ -52,7 +53,7 @@ class Rectangle(
 ) : Figure(color) {
     override fun calculateArea() = (width * height).toDouble()
 
-    override fun calculatePerimeter() = (width * 2 + height * 2).toDouble()
+    override fun calculatePerimeter() = (width + height) * 2.toDouble()
 }
 
 enum class FigureColor(val value: String) {
