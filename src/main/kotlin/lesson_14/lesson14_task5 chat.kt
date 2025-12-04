@@ -8,8 +8,10 @@ fun main() {
 
     chat.addMessage(text = "drtdfhd", author = "aaa")
     chat.addMessage(text = "yurtdjd", author = "bbb")
-//    chat.addThreadMessage()
+    chat.addThreadMessage(text = "sgsfdg", author = "ddd", parentMessageId = 1)
+    chat.addThreadMessage(text = "fxgjhf", author = "aaa", parentMessageId = 1)
     chat.addMessage(text = "iuouioluil", author = "ccc")
+    chat.addThreadMessage(text = "poop", author = "bbb", parentMessageId = 1)
 
     chat.printChat()
 }
@@ -32,12 +34,17 @@ class Chat(
         author: String,
         parentMessageId: Int,
     ) {
-
+        messageList.add(ChildMessage(text = text, author = author, id = id++, parentMessageId = parentMessageId))
     }
 
     fun printChat() {
         println()
-        messageList.forEach { println("${it.author}: ${it.text}") }
+//        messageList.forEach { println("${if (it is ChildMessage) "\t" else ""}${it.author}: ${it.text}") }
+        messageList.forEach { println("${if (it is ChildMessage) "\t" else ""}${it.author}: ${it.text}") }
+        println()
+//        println(messageList.groupBy { if (it is ChildMessage) it.parentMessageId else it.id })
+        val list = messageList.groupBy { if (it is ChildMessage) it.parentMessageId else it.id }
+        list.forEach { it.value.forEach { println("${if (it is ChildMessage) "\t" else ""}${it.author}: ${it.text}") } }
     }
 }
 
