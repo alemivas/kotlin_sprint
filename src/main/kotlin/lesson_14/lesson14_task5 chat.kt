@@ -2,25 +2,23 @@ package org.example.lesson_14
 
 fun main() {
     println("=== Чат ===")
-
     val chat = Chat()
-//    val chat: Chat
-
-    chat.addMessage(text = "drtdfhd", author = "aaa")
-    chat.addMessage(text = "yurtdjd", author = "bbb")
-    chat.addThreadMessage(text = "sgsfdg", author = "ddd", parentMessageId = 1)
-    chat.addThreadMessage(text = "fxgjhf", author = "aaa", parentMessageId = 1)
-    chat.addMessage(text = "iuouioluil", author = "ccc")
-    chat.addThreadMessage(text = "poop", author = "bbb", parentMessageId = 1)
+    chat.addMessage(text = "0 сообщение", author = "aaa")
+    chat.addMessage(text = "1 сообщение", author = "bbb")
+    chat.addThreadMessage(text = "0 ответ на сообщение1", author = "ddd", parentMessageId = 1)
+    chat.addMessage(text = "2 сообщение", author = "ccc")
+    chat.addThreadMessage(text = "1 ответ на сообщение1", author = "bbb", parentMessageId = 1)
+    chat.addThreadMessage(text = "0 ответ на сообщение0", author = "bbb", parentMessageId = 0)
+    chat.addThreadMessage(text = "0 ответ на сообщение2", author = "ddd", parentMessageId = 3)
+    chat.addThreadMessage(text = "2 ответ на сообщение1", author = "aaa", parentMessageId = 1)
 
     chat.printChat()
 }
 
 class Chat(
-//    /*private*/ val messageList: MutableList<Message>,
-    val messageList: MutableList<Message> = mutableListOf(),
+    private val messageList: MutableList<Message> = mutableListOf(),
 ) {
-    /*private*/ var id = 0
+    private var id = 0
 
     fun addMessage(
         text: String,
@@ -39,12 +37,12 @@ class Chat(
 
     fun printChat() {
         println()
-//        messageList.forEach { println("${if (it is ChildMessage) "\t" else ""}${it.author}: ${it.text}") }
-        messageList.forEach { println("${if (it is ChildMessage) "\t" else ""}${it.author}: ${it.text}") }
-        println()
-//        println(messageList.groupBy { if (it is ChildMessage) it.parentMessageId else it.id })
-        val list = messageList.groupBy { if (it is ChildMessage) it.parentMessageId else it.id }
-        list.forEach { it.value.forEach { println("${if (it is ChildMessage) "\t" else ""}${it.author}: ${it.text}") } }
+        val groupedMessageMap = messageList.groupBy { if (it is ChildMessage) it.parentMessageId else it.id }
+        groupedMessageMap.forEach { messageGroup ->
+            messageGroup.value.forEach { message ->
+                println("${if (message is ChildMessage) "\t" else ""}${message.author}: ${message.text}")
+            }
+        }
     }
 }
 
