@@ -8,16 +8,27 @@ fun main() {
 
 abstract class WeatherStationStats {
     //возмо задать свво число
+    abstract val weatherStationStatsAmount: Int
+
     // и/или метод printAmount
+    abstract fun printWeatherStationStats()
 }
 
 class Temperature(
-    val number: Int,
+    override val weatherStationStatsAmount: Int,
 ) : WeatherStationStats() {
+    override fun printWeatherStationStats() {
+        println("Температура $weatherStationStatsAmount °C")
+    }
 
 }
 
-class PrecipitationAmount : WeatherStationStats() {
+class PrecipitationAmount(
+    override val weatherStationStatsAmount: Int
+) : WeatherStationStats() {
+    override fun printWeatherStationStats() {
+        println("Количество осадков $weatherStationStatsAmount мм")
+    }
 
 }
 
