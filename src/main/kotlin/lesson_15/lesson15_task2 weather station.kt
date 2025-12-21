@@ -3,14 +3,18 @@ package org.example.lesson_15
 fun main() {
     println("=== Система мониторинга погодных условий ===")
 
+    val weatherServer = WeatherServer()
 
+    val temperature = Temperature(weatherStationStatsAmount = 20)
+    weatherServer.sendMessageToServer(stats = temperature)
+
+    val precipitationAmount = PrecipitationAmount(weatherStationStatsAmount = 5)
+    weatherServer.sendMessageToServer(stats = precipitationAmount)
 }
 
 abstract class WeatherStationStats {
-    //возмо задать свво число
     abstract val weatherStationStatsAmount: Int
 
-    // и/или метод printAmount
     abstract fun printWeatherStationStats()
 }
 
@@ -20,7 +24,6 @@ class Temperature(
     override fun printWeatherStationStats() {
         println("Температура $weatherStationStatsAmount °C")
     }
-
 }
 
 class PrecipitationAmount(
@@ -29,11 +32,12 @@ class PrecipitationAmount(
     override fun printWeatherStationStats() {
         println("Количество осадков $weatherStationStatsAmount мм")
     }
-
 }
 
 class WeatherServer {
-    fun sendMessageToServer(message: WeatherStationStats) {
+    fun sendMessageToServer(stats: WeatherStationStats) {
         println()
+        println("Сообщение отправленно на сервер:")
+        stats.printWeatherStationStats()
     }
 }
