@@ -3,13 +3,14 @@ package org.example.lesson_15
 fun main() {
     println("=== грузовые и легковые автомобили ===")
 
-    val audiCar = Cars(name = "легковой Audi", currentPassengerAmount = 3, currentCargoAmount = 0)
-    val fordTruck = Trucks(name = "грузовой Ford", currentPassengerAmount = 1, currentCargoAmount = 1)
-    val kamazTruck = Trucks(name = "грузовой Kamaz", currentPassengerAmount = 0, currentCargoAmount = 1)
-    val nivaCar = Cars(name = "легковой Niva", currentPassengerAmount = 2, currentCargoAmount = 0)
+    val audiCar = Car(name = "легковой Audi", currentPassengerAmount = 3, currentCargoAmount = 0)
+    val fordTruck = Truck(name = "грузовой Ford", currentPassengerAmount = 1, currentCargoAmount = 1)
+    val kamazTruck = Truck(name = "грузовой Kamaz", currentPassengerAmount = 0, currentCargoAmount = 1)
+    val nivaCar = Car(name = "легковой Niva", currentPassengerAmount = 2, currentCargoAmount = 0)
 
     audiCar.loadCargo(maxCargoCapacity = 0, currentCargoAmount = 0)
-    audiCar.loadPassenger(maxPassengerCapacity = 3, currentPassengerAmount = 3)
+//    audiCar.loadPassenger(maxPassengerCapacity = 3, currentPassengerAmount = 3)
+    audiCar.loadPassenger()
     audiCar.startAutomobile(name = "легковой Audi")
     audiCar.stopAutomobile(name = "легковой Audi")
     audiCar.unloadPassenger()
@@ -18,13 +19,13 @@ fun main() {
 
 abstract class Automobile : Movement, PassengerTransportation, CargoTransportation {
     abstract val name: String
-    abstract val maxPassengerCapacity: Int
+    abstract override val maxPassengerCapacity: Int
     abstract val maxCargoCapacity: Int
-    abstract val currentPassengerAmount: Int
+    abstract override val currentPassengerAmount: Int
     abstract val currentCargoAmount: Int
 }
 
-class Trucks(
+class Truck(
     override val name: String,
     override val maxPassengerCapacity: Int = 1,
     override val maxCargoCapacity: Int = 2,
@@ -40,7 +41,7 @@ class Trucks(
 //    }
 }
 
-class Cars(
+class Car(
     override val name: String,
     override val maxPassengerCapacity: Int = 3,
     override val maxCargoCapacity: Int = 0,
@@ -60,18 +61,22 @@ interface Movement {
     fun startAutomobile(name: String) {
         println("Автомобиль $name выехал")
     }
+
     fun stopAutomobile(name: String) {
         println("Автомобиль $name остановился")
     }
 }
 
 interface PassengerTransportation {
-    fun loadPassenger(maxPassengerCapacity: Int, currentPassengerAmount: Int) {
-        if (currentPassengerAmount > maxPassengerCapacity)
+    val maxPassengerCapacity: Int
+    val currentPassengerAmount: Int
+
+    //    fun loadPassenger(/*maxPassengerCapacity: Int, currentPassengerAmount: Int*/) {
+    fun loadPassenger(desiredPassengerAmount: Int) =
+        if (currentPassengerAmount + desiredPassengerAmount > maxPassengerCapacity)
             println("В автомобиль сели $maxPassengerCapacity пассажиров")
         else
             println("В автомобиль сели $currentPassengerAmount пассажиров")
-    }
 
     fun unloadPassenger() {
         println("Из автомобиля вышли пассажиры")
