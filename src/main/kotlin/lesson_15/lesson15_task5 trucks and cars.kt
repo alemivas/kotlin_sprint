@@ -3,110 +3,138 @@ package org.example.lesson_15
 fun main() {
     println("=== грузовые и легковые автомобили ===")
 
+    var transportedPassengerAmount = 0
+    var transportedCargoAmount = 0
     val audiCar = Car(name = "легковой Audi")
-    val fordTruck = Truck(name = "грузовой Ford", currentPassengerAmount = 1, currentCargoAmount = 1)
-    val kamazTruck = Truck(name = "грузовой Kamaz", currentPassengerAmount = 0, currentCargoAmount = 1)
-    val nivaCar = Car(name = "легковой Niva", currentPassengerAmount = 2, currentCargoAmount = 0)
+    val fordTruck = Truck(name = "грузовой Ford")
+    val kamazTruck = Truck(name = "грузовой Kamaz")
+    val nivaCar = Car(name = "легковой Niva")
 
-    audiCar.loadCargo(maxCargoCapacity = 0, currentCargoAmount = 0)
-//    audiCar.loadPassenger(maxPassengerCapacity = 3, currentPassengerAmount = 3)
-    audiCar.loadPassenger(desiredPassengerAmount = 2)
-    audiCar.loadPassenger(desiredPassengerAmount = 2)
-    audiCar.loadPassenger(desiredPassengerAmount = 2)
-    audiCar.startAutomobile(name = "легковой Audi")
-    audiCar.stopAutomobile(name = "легковой Audi")
+    println()
+    audiCar.loadCargo(desiredCargoAmount = 1)
+    transportedPassengerAmount += audiCar.loadPassenger(desiredPassengerAmount = 2)
+    transportedPassengerAmount += audiCar.loadPassenger(desiredPassengerAmount = 2)
+    transportedPassengerAmount += audiCar.loadPassenger(desiredPassengerAmount = 2)
+    audiCar.startAutomobile()
+    audiCar.arriveAutomobile()
     audiCar.unloadPassenger()
     audiCar.unloadCargo()
+
+    println()
+    transportedCargoAmount += fordTruck.loadCargo(desiredCargoAmount = 1)
+    transportedPassengerAmount += fordTruck.loadPassenger(desiredPassengerAmount = 2)
+    fordTruck.startAutomobile()
+    fordTruck.arriveAutomobile()
+    fordTruck.unloadPassenger()
+    fordTruck.unloadCargo()
+
+    println()
+    transportedCargoAmount += kamazTruck.loadCargo(desiredCargoAmount = 1)
+    transportedPassengerAmount += kamazTruck.loadPassenger(desiredPassengerAmount = 0)
+    kamazTruck.startAutomobile()
+    kamazTruck.arriveAutomobile()
+    kamazTruck.unloadPassenger()
+    kamazTruck.unloadCargo()
+
+    println()
+    nivaCar.loadCargo(desiredCargoAmount = 1)
+    transportedPassengerAmount += nivaCar.loadPassenger(desiredPassengerAmount = 2)
+    nivaCar.startAutomobile()
+    nivaCar.arriveAutomobile()
+    nivaCar.unloadPassenger()
+    nivaCar.unloadCargo()
+
+    println()
+    println("Всего перевезено $transportedPassengerAmount человек")
+    println("Всего перевезено $transportedCargoAmount т груза")
 }
 
 abstract class Automobile : Movement, PassengerTransportation, CargoTransportation {
-    abstract val name: String
+    abstract override val name: String
     abstract override val maxPassengerCapacity: Int
-    abstract val maxCargoCapacity: Int
+    abstract override val maxCargoCapacity: Int
     abstract override var currentPassengerAmount: Int
-    abstract val currentCargoAmount: Int
+    abstract override var currentCargoAmount: Int
 }
 
 class Truck(
     override val name: String,
     override val maxPassengerCapacity: Int = 1,
     override val maxCargoCapacity: Int = 2,
-    override var currentPassengerAmount: Int,
-    override val currentCargoAmount: Int,
-) : Automobile() {
-//    override fun startAutomobile() {
-//        println("Грузовой автомобиль $name выехал")
-//    }
-//
-//    override fun stopAutomobile() {
-//        println("Грузовой автомобиль $name остановился")
-//    }
-}
+    override var currentPassengerAmount: Int = 0,
+    override var currentCargoAmount: Int = 0,
+) : Automobile()
 
 class Car(
     override val name: String,
     override val maxPassengerCapacity: Int = 3,
     override val maxCargoCapacity: Int = 0,
     override var currentPassengerAmount: Int = 0,
-    override val currentCargoAmount: Int = 0,
-) : Automobile() {
-//    override fun startAutomobile() {
-//        println("Легковой автомобиль $name выехал")
-//    }
-//
-//    override fun stopAutomobile() {
-//        println("Легковой автомобиль $name остановился")
-//    }
-}
+    override var currentCargoAmount: Int = 0,
+) : Automobile()
 
 interface Movement {
-    fun startAutomobile(name: String) {
-        println("Автомобиль $name выехал")
+    val name: String
+
+    fun startAutomobile() {
+        println("$name выехал")
     }
 
-    fun stopAutomobile(name: String) {
-        println("Автомобиль $name остановился")
+    fun arriveAutomobile() {
+        println("$name приехал")
     }
 }
 
 interface PassengerTransportation {
+    val name: String
     val maxPassengerCapacity: Int
     var currentPassengerAmount: Int
 
-    //    fun loadPassenger(/*maxPassengerCapacity: Int, currentPassengerAmount: Int*/) {
     fun loadPassenger(desiredPassengerAmount: Int): Int {
-        var boardingPassengerAmount = 0
+        val boardingPassengerAmount: Int
         if (currentPassengerAmount + desiredPassengerAmount > maxPassengerCapacity) {
             boardingPassengerAmount = maxPassengerCapacity - currentPassengerAmount
-//            println("В автомобиль сели $boardingPassengerAmount пассажиров")
             currentPassengerAmount = maxPassengerCapacity
-//            boardingPassengerAmount
         } else {
             boardingPassengerAmount = desiredPassengerAmount
-//            println("В автомобиль сели $desiredPassengerAmount пассажиров")
             currentPassengerAmount += desiredPassengerAmount
-//            desiredPassengerAmount
         }
-        println("В автомобиль сели $boardingPassengerAmount пассажиров. " +
-                "Всего $currentPassengerAmount пассажиров")
+        println(
+            "В $name сели $boardingPassengerAmount пассажиров (из $desiredPassengerAmount). " +
+            "Всего $currentPassengerAmount пассажиров"
+        )
         return boardingPassengerAmount
     }
 
     fun unloadPassenger() {
         currentPassengerAmount = 0
-        println("Из автомобиля вышли все пассажиры")
+        println("Из $name вышли все пассажиры")
     }
 }
 
 interface CargoTransportation {
-    fun loadCargo(maxCargoCapacity: Int, currentCargoAmount: Int) {
-        if (currentCargoAmount > maxCargoCapacity)
-            println("В автомобиль загружено $maxCargoCapacity т груза")
-        else
-            println("В автомобиль загружено $currentCargoAmount т груза")
+    val name: String
+    val maxCargoCapacity: Int
+    var currentCargoAmount: Int
+
+    fun loadCargo(desiredCargoAmount: Int): Int {
+        val loadedCargoAmount: Int
+        if (currentCargoAmount + desiredCargoAmount > maxCargoCapacity) {
+            loadedCargoAmount = maxCargoCapacity - currentCargoAmount
+            currentCargoAmount = maxCargoCapacity
+        } else {
+            loadedCargoAmount = desiredCargoAmount
+            currentCargoAmount += desiredCargoAmount
+        }
+        println(
+            "В $name загрузили $loadedCargoAmount т груза (из $desiredCargoAmount). " +
+            "Всего $currentCargoAmount т груза"
+        )
+        return loadedCargoAmount
     }
 
     fun unloadCargo() {
-        println("Из автомобиля выгружен груз")
+        currentCargoAmount = 0
+        println("Из $name выгрузили весь груз")
     }
 }
