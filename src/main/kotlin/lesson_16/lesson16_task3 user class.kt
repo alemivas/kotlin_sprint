@@ -11,7 +11,7 @@ fun main() {
 }
 
 class User(
-    val login: String,
+    private val login: String,
     private val password: String,
 ) {
     fun isValidPassword(enteredPassword: String) = enteredPassword == password
