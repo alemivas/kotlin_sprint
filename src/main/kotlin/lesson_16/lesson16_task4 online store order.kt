@@ -4,7 +4,7 @@ fun main() {
     println("=== Заказ в интернет-магазине ===")
     println()
     val order = Order(orderNumber = 5, orderStatus = OrderStatus.ORDER_PLACED)
-    order.sendRequestToChangeOrderStatus(newStatus = OrderStatus.ORDER_SENT)
+    order.requestStatusChange(newStatus = OrderStatus.ORDER_SENT)
 }
 
 class Order(
@@ -20,7 +20,7 @@ class Order(
         println("Статус заказа № $orderNumber изменен на \"${orderStatus.value}\"")
     }
 
-    fun sendRequestToChangeOrderStatus(newStatus: OrderStatus) {
+    fun requestStatusChange(newStatus: OrderStatus) {
         println("Отправлена заявка менеджеру на смену статуса заказа № $orderNumber")
         println("Менеджер подтвердил смену статуса заказа № $orderNumber")
         changeOrderStatus(newStatus = newStatus)
