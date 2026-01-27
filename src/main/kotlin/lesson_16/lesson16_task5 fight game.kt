@@ -14,7 +14,7 @@ fun main() {
 }
 
 class Player(
-    val name: String,
+    private val name: String,
 ) {
     private var health: Int = 100
     private var hittingPower: Int = 30
@@ -24,16 +24,16 @@ class Player(
     }
 
     fun receiveDamage(damage: Int) {
-        health -= damage
         print("$name получил урон на $damage")
-        if (health > 0)
+        if (damage < health) {
+            health -= damage
             println(". Уровень здоровья $health")
-        else
+        } else
             kill()
     }
 
     fun heal(healAmount: Int) {
-        if (health != 0) {
+        if (health > 0) {
             health += healAmount
             println("$name получил лечение на $healAmount. Уровень здоровья $health")
         } else
