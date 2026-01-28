@@ -3,23 +3,23 @@ package lesson_17_Getter_and_Setter
 fun main() {
     println("=== Викторина ===")
     println()
-    val quizElement = QuizElement(
-        _question = "How many?", _answer = "7"
+    val quizItem = QuizItem(
+        question = "How many?", answer = "7"
     )
-    println(quizElement.question)
-    println(quizElement.answer)
-    quizElement.answer = "10"
-    println(quizElement.answer)
+    println(quizItem.question)
+    println(quizItem.answer)
+    quizItem.answer = "10"
+    println(quizItem.answer)
 }
 
-class QuizElement(
-    _question: String,
-    _answer: String,
+class QuizItem(
+    question: String,
+    answer: String,
 ) {
-    val question = _question
+    var question: String = question
         get() = field
 
-    var answer = _answer
+    var answer: String = answer
         get() = field
         set(value) {
             field = value
