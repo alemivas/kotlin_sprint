@@ -3,24 +3,21 @@ package lesson_18_Polymorphism
 fun main() {
     println("=== Заказы в интернет магазине ===")
     println()
-    val order1 = Order()
-    order1.addOrder(orderNumber = 1, products = "Брюки")
+    val order1 = Order(orderNumber = 1)
+    order1.addProducts(products = "Брюки")
     println()
-    val order2 = Order()
-    order2.addOrder(orderNumber = 2, products = listOf("Шляпа", "Кроссовки", "Носки"))
+    val order2 = Order(orderNumber = 2)
+    order2.addProducts(products = listOf("Шляпа", "Кроссовки", "Носки"))
 }
 
-class Order {
-    fun addOrder(
-        orderNumber: Int,
-        products: String,
-    ) {
+class Order(
+    private val orderNumber: Int,
+) {
+    fun addProducts(products: String) {
         println("Заказ №$orderNumber. Заказан товар: $products")
     }
-    fun addOrder(
-        orderNumber: Int,
-        products: List<String>,
-    ) {
+
+    fun addProducts(products: List<String>) {
         println("Заказ №$orderNumber. Заказаны следующие товары: ${products.joinToString()}")
     }
 }
