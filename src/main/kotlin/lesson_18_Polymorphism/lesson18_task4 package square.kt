@@ -6,8 +6,8 @@ fun main() {
     println("=== Площадь упаковки посылки ===")
     println()
     val boxList = listOf(
-        RectangleBox(length = 3, width = 4, height = 5),
-        CubeBox(edge = 10)
+        RectangleBox(length = 3.0, width = 4.0, height = 5.0),
+        CubeBox(edge = 10.0)
     )
     boxList.forEach {
         println("Площадь поверхности посылки ${it.boxSurfaceArea()}")
@@ -15,19 +15,19 @@ fun main() {
 }
 
 abstract class Box {
-    abstract fun boxSurfaceArea(): Int
+    abstract fun boxSurfaceArea(): Double
 }
 
 class RectangleBox(
-    private val length: Int,
-    private val width: Int,
-    private val height: Int,
+    private val length: Double,
+    private val width: Double,
+    private val height: Double,
 ) : Box() {
     override fun boxSurfaceArea() = (length * width + length * height + width * height) * 2
 }
 
 class CubeBox(
-    private val edge: Int,
+    private val edge: Double,
 ) : Box() {
-    override fun boxSurfaceArea() = (edge.toDouble().pow(2) * 6).toInt()
+    override fun boxSurfaceArea() = edge.pow(2) * 6
 }
