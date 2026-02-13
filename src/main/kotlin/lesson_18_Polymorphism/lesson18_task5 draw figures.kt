@@ -50,18 +50,10 @@ class Screen {
     ) = "Нарисована ${figureType.typeName} с координатами ($x, $y)"
 }
 
-abstract class Figure {
-    abstract val typeName: String
-}
+abstract class Figure(val typeName: String)
 
-class Circle() : Figure() {
-    override val typeName = "Круг"
-}
+class Circle : Figure(typeName = "Круг")
 
-class Square() : Figure() {
-    override val typeName = "Квадрат"
-}
+class Square : Figure(typeName = "Квадрат")
 
-class Dot() : Figure() {
-    override val typeName = "Точка"
-}
+class Dot : Figure(typeName = "Точка")
