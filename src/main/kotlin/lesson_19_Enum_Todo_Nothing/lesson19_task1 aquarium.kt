@@ -5,7 +5,7 @@ fun main() {
     println()
     println("Вы можете добавить в свой аквариум следующие виды рыб:")
     Fish.entries.forEach { fish ->
-        println("${fish.ordinal + 1}. ${fish.rusName}")
+        println("${fish.ordinal + 1}. ${fish.rusName} (${formatConstant(fish.name)})")
     }
 }
 
@@ -15,3 +15,8 @@ enum class Fish(val rusName: String) {
     GOLDFISH(rusName = "Золотая рыбка"),
     SIAMESE_FIGHTING_FISH(rusName = "Петушок"),
 }
+
+fun formatConstant(name: String) =
+    name.replace("_", " ")
+        .lowercase()
+        .replaceFirstChar { it.uppercase() }
