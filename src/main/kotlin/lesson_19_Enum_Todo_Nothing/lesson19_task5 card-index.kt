@@ -5,42 +5,43 @@ fun main() {
     println()
     println("Заполните картотеку на $PERSON_AMOUNT человек")
     println("Нужно ввести Имя и Пол " +
-            "\"${Gender.MALE.shortValue}\" (${Gender.MALE.value}) или " +
-            "\"${Gender.FEMALE.shortValue}\" (${Gender.FEMALE.value})")
+            "\"${Sex.MALE.shortValue}\" (${Sex.MALE.value}) или " +
+            "\"${Sex.FEMALE.shortValue}\" (${Sex.FEMALE.value})")
     val cardIndex = mutableListOf<Person>()
 
     for (i in 1..PERSON_AMOUNT) {
         println()
         print("Введите Имя: ")
         val name = readln()
-        print("Введите Пол: ")
-        val stringGender = readln()
-        when (stringGender) {
-            Gender.MALE.shortValue -> {
-                cardIndex.add(Person(name = name, gender = Gender.MALE))
-            }
-
-            Gender.FEMALE.shortValue -> {
-                cardIndex.add(Person(name = name, gender = Gender.FEMALE))
-            }
-
-            else -> println("Пол введен не корректно. Человек не добавлен в картотеку")
-        }
+        val sex = readSex()
+        cardIndex.add(Person(name = name, sex = sex))
     }
 
     println()
     println("Картотека заполнена:")
     cardIndex.forEach { person ->
-        println("Имя: ${person.name}, Пол: ${person.gender.value}")
+        println("Имя: ${person.name}, Пол: ${person.sex.value}")
+    }
+}
+
+fun readSex(): Sex {
+    while (true) {
+        print("Введите Пол: ")
+        val stringSex = readln()
+        when (stringSex.lowercase()) {
+            Sex.MALE.shortValue -> return Sex.MALE
+            Sex.FEMALE.shortValue -> return Sex.FEMALE
+            else -> println("Пол введен не корректно.")
+        }
     }
 }
 
 class Person(
     val name: String,
-    val gender: Gender,
+    val sex: Sex,
 )
 
-enum class Gender(val value: String, val shortValue: String) {
+enum class Sex(val value: String, val shortValue: String) {
     MALE("Мужской", "м"),
     FEMALE("Женский", "ж"),
 }
