@@ -3,30 +3,22 @@ package org.example.lesson_20_Lambda
 fun main() {
     println("=== Говорящий робот ===")
     println()
-
+    val robot = Robot()
+    val modifier: (String) -> String = { it.reversed() }
+    robot.say()
+    robot.setModifier(modifier)
+    robot.say()
 }
 
 class Robot {
-    private var phrase = ""
-
-    private val phraseList = listOf("первая фраза", "вторая фраза", "третья фраза", "четвертая фраза", "пятая фраза")
-
-    private val modifier = { phrase = phrase.uppercase() }
+    private val phraseList = listOf("Привет!", "Здравствуйте!", "Добрый день!", "Салют!", "Хеллоу!")
+    private var phrase = phraseList.random()
 
     fun say() {
-        phrase = phraseList.random()
         println(phrase)
     }
 
-    fun setModifier(modifier: () -> Unit) {
-
+    fun setModifier(modifier: (String) -> String) {
+        phrase = modifier(phrase)
     }
 }
-
-//enum class Phrase(val value: String) {
-//    ONE("первая фраза"),
-//    TWO("вторая фраза"),
-//    THREE("третья фраза"),
-//    FOUR("четвертая фраза"),
-//    FIVE("пятая фраза"),
-//}
