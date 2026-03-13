@@ -8,6 +8,6 @@ fun main() {
 }
 
 fun String.vowelCount(): Int {
-    val vowels = "aeiouy"
-    return count { it.lowercase() in vowels }
+    val vowels = "aeiouyAEIOUY"
+    return count { it in vowels }
 }
