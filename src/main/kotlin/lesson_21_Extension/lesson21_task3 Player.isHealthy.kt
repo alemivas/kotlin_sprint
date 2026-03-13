@@ -3,7 +3,7 @@ package org.example.lesson_21_Extension
 fun main() {
     println("=== Лечебное зелье. Проверка здоровья ===")
     println()
-    val player1 = Player(name = "Zub", health = 54)
+    val player1 = Player(name = "Zub", health = 54, maxHealth = 100)
     println()
     println("Здоровье игрока максимально? ${player1.isHealthy()}")
     val takeHealingPotion: (Player) -> Unit = { player: Player ->
@@ -20,14 +20,12 @@ fun main() {
 class Player(
     val name: String,
     var health: Int,
+    val maxHealth: Int,
 ) {
-    val maxHealth: Int = 100
-
     init {
         println("Создан игрок по имени $name")
         println("Текущее здоровье $health из $maxHealth")
     }
 }
 
-fun Player.isHealthy() =
-    health == maxHealth
+fun Player.isHealthy() = health == maxHealth
