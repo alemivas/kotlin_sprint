@@ -9,9 +9,9 @@ fun main() {
         "Скорость" to 35,
         "Магия" to 70,
     )
-    println("Самый прокачанный навык: ${experience.maxCategory()}")
+    println("Самый прокачанный навык: ${experience.maxCategory() ?: "<Нет данных>"}")
 }
 
-fun Map<String, Int>.maxCategory(): String {
-    return maxBy { it.value }.key
+fun Map<String, Int>.maxCategory(): String? {
+    return maxByOrNull { it.value }?.key
 }
