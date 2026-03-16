@@ -16,5 +16,4 @@ fun File.prependText(word: String) {
     val lowercaseWord = word.lowercase()
     val text = readText()
     writeText(lowercaseWord + "\n" + text)
-    println("В начало файла $name записано \"$lowercaseWord\"")
 }
