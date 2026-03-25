@@ -12,13 +12,13 @@ fun main() {
         )
     )
 
-    for ((name, description, dateTime, distance) in galacticGuideList) {
+    for (galacticGuide in galacticGuideList) {
         println()
         println(
-            "Name of place or event: $name\n" +
-            "Description of place or event: $description\n" +
-            "Date and time of event: ${dateTime ?: "<no data>"}\n" +
-            "Distance of a place or event from Earth in light years: $distance"
+            "Name of place or event: ${galacticGuide.component1()}\n" +
+            "Description of place or event: ${galacticGuide.component2()}\n" +
+            "Date and time of event: ${galacticGuide.component3() ?: "<no data>"}\n" +
+            "Distance of a place or event from Earth in light years: ${galacticGuide.component4()}"
         )
     }
 }
